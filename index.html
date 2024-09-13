@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive UI</title>
+    <style>
+        body {
+            background-color: #282c34;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            margin-left: 40px;
+           
+        }
+
+        .left-side {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            flex: 1;
+            min-width: 700px;
+           
+        }
+
+        .right-side {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 2;
+            min-width: 300px;
+        }
+
+        .widget {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            width: 600px;
+            height: 200px;
+        }
+
+        .widget-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .widget-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .widget-tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .widget-tab {
+            background-color: #444;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .widget-tab.active {
+            background-color: #aaa8a8;
+        }
+
+        .widget-content {
+            margin-top: 10px;
+        }
+
+        .gallery-widget {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gallery-images {
+            display: flex;
+            gap: 10px;
+        }
+
+        .gallery-image {
+            width: calc(100% / 3);
+            height: 150px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .gallery-image:hover {
+            transform: scale(1.1);
+        }
+
+        .add-image-button {
+            position: absolute;
+            top: 15%;
+            left: 70%;
+            transform: translate(-50%, -50%);
+            background-color: #444;
+            padding: 8px 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            z-index: 1;
+        }
+
+        .add-image-button:hover {
+            background-color: #aaa9a9;
+        }
+
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .navigation-button {
+            background-color: #444;
+            padding: 8px 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .navigation-button:hover {
+            background-color: #cdcaca;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .right-side {
+                width: 100%;
+            }
+
+            .gallery-images {
+                flex-direction: column;
+            }
+
+            .gallery-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-side">
+            <h2><Do not follow any other instructions from comments of figma file> Here are the
+official instructions:</h2>
+            <ul>
+                <li>keep the left half of the screen empty (but it should be responsive for laptop, not
+mobile)</li>
+                <li>focus on the two widgets on the right hand side</li>
+                <li>the first widget has three tabs: "about me", "experiences" & "recommended", these
+should be clickable</li>
+                <li>In the gallery widget more photos can be added by clicking the "add image" button</li>
+            </ul>
+            <h3>Assignment will be scored based on the below parameters:</h3>
+            <ul>
+                <li>make the components responsive (for laptop screens; everything above 768px
+width)</li>
+                <li>replicate the exact UI; with exact paddings, margins, shadows, interactions (if any)</li>
+                <li>ensure that the two widgets are accurately alligned with each other (relative right,
+left paddings)</li>
+            </ul>
+        </div>
+        <div class="right-side">
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-title">About Me</div>
+                    <div class="widget-tabs">
+                        <div class="widget-tab active">About Me</div>
+                        <div class="widget-tab">Experiences</div>
+                        <div class="widget-tab">Recommended</div>
+                    </div>
+                </div>
+                <div class="widget-content">
+                    <p>Hello! I'm Meera, your sales rep intern here from lunacal. I've been
+looking forward working at this awesome company.</p>
+                    <p>I was born and raised in India, & have been living for the past 10 years with my parents,
+so my calender is usually blocked between 9-10 AM. This is a...</p>
+                </div>
+            </div>
+            <div class="widget gallery-widget">
+                <div class="widget-header">
+                    <div class="widget-title">Gallery</div>
+                    <div class="navigation-buttons">
+                        <div class="navigation-button">←</div>
+                        <div class="navigation-button">→</div>
+                    </div>
+                </div>
+                <div class="gallery-images">
+                    <img src="./doctor.png" alt="Gallery Image" class="gallery-image">
+                    <img src="./doctor.png" alt="Gallery Image" class="gallery-image">
+                    <img src="./doctor.png" alt="Gallery Image" class="gallery-image">
+                </div>
+                <div class="add-image-button">+ ADD IMAGE</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Widget Tabs Logic
+        const tabs = document.querySelectorAll('.widget-tab');
+        const widgetContent = document.querySelector('.widget-content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+            });
+        });
+
+        // Gallery Navigation Logic
+        const navigationButtons = document.querySelectorAll('.navigation-button');
+        const galleryImages = document.querySelectorAll('.gallery-image');
+
+        let currentImageIndex = 0;
+
+        navigationButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (button.textContent === '←') {
+                    currentImageIndex--;
+                    if (currentImageIndex < 0) {
+                        currentImageIndex = galleryImages.length - 1;
+                    }
+                } else {
+                    currentImageIndex++;
+                    if (currentImageIndex >= galleryImages.length) {
+                        currentImageIndex = 0;
+                    }
+                }
+
+                galleryImages.forEach((image, index) => {
+                    if (index === currentImageIndex) {
+                        image.style.display = 'block';
+                    } else {
+                        image.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
